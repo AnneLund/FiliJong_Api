@@ -14,19 +14,20 @@ class WishController {
         console.log('Instance call of user controller')
     }
 
-    // list = async (req, res) => {
-    //     const result = await ProductsModel.findAll({
-    //         where: {id: 1},
-    //         include: [{
-    //             model: CategoriesModel,
-    //             attributes: ['name'],
-    //             through: {
-    //                 attributes: []
-    //             }
-    //         }]
-    //     })
-    //     res.json(result)
-    // };
+    list = async (req, res) => {
+        const result = await WishModel.findAll({
+            // where: {id: 1},
+            include: [{
+                model: UserModel,
+                attributes: ['user_id'],
+                through: {
+                    attributes: []
+                }
+            },
+          ]
+        })
+        res.json(result)
+    };
 
     
     list = async (req, res) => {
@@ -40,6 +41,20 @@ class WishController {
         //&& description && price && horsepower && production_year && fuel_type && doors && seats && geartype && weight && acceleration && measurements && available && category_id
         if (title) {
             const wish = await WishModel.create(req.body)
+          
+            return res.json({newId: wish.id})
+        } else {
+            console.log('Create failed')
+            res.sendStatus(418);
+        }
+    }
+
+    put = async(req, res) => {
+        console.log(req.body)
+        const {title, description, image, url, købt} = req.body
+        //&& description && price && horsepower && production_year && fuel_type && doors && seats && geartype && weight && acceleration && measurements && available && category_id
+        if (købt) {
+            const wish = await WishModel.put(req.body)
             return res.json({newId: wish.id})
         } else {
             console.log('Create failed')
