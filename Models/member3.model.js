@@ -2,9 +2,8 @@ const {sequelize} = require('../Config/db.sequelize.js')
 const DataTypes = require('sequelize')
 const {Model} = require('sequelize')
 
-class WishModel extends Model {}
-
-WishModel.init({
+class Member3Model extends Model {}
+Member3Model.init({
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -29,12 +28,13 @@ WishModel.init({
     },
     købt: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
+        defaultValue: 0
     }
 },
 {
     sequelize,
-    modelName: 'wish',
+    modelName: 'member3_wishList',
     freezeTableName: true,
     underscored: true,
     createdAt: false,
@@ -42,4 +42,4 @@ WishModel.init({
 }
 )
 
-module.exports = WishModel;
+module.exports = Member3Model;

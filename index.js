@@ -6,7 +6,10 @@ const {UserRouter} = require('./Routes/user.router.js')
 const {initRouter} = require('./Routes/init.sequelize.router.js')
 const {AuthRouter} = require('./Routes/auth.router.js')
 const {RoleRouter} = require('./Routes/role.router.js')
-const {WishRouter} = require('./Routes/wish.router.js')
+const {Member1Router} = require('./Routes/member1.router.js')
+const {Member2Router} = require('./Routes/member2.router.js')
+const {Member3Router} = require('./Routes/member3.router.js')
+const {Member4Router} = require('./Routes/member4.router.js')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -44,7 +47,10 @@ app.use(UserRouter)
 app.use(initRouter)
 app.use(AuthRouter)
 app.use(RoleRouter)
-app.use(WishRouter)
+app.use(Member1Router)
+app.use(Member2Router)
+app.use(Member3Router)
+app.use(Member4Router)
 
 app.listen(PORT, () => {
     console.log(`Kører på port ${PORT}`)

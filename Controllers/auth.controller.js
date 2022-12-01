@@ -16,20 +16,23 @@ class AuthController {
 
         if(username && password) {
             const data = await UserModel.findOne({
-                attributes: ["id", "username", "password"],
+                attributes: ["id", "username", "password", "role_id"],
                 where: {username: username}
             })
             if(data === null) {
-                return res.sendStatus(404)
+                return res.send({status: "Fejl i brugernavn/kode"})
             }
             bcrypt.compare(password, data.password, (err, result) => {
                 if(result) {
                     const payload = {
                     user_id: data.id,
-                    username: data.username,     
+                    username: data.username,
+                    role_id: data.role_id
                     }
+                   
                     const token = jwt.sign(payload, process.env.SECRET )
-                    return res.json({token: token})
+                    return res.json(
+                        {token: token, payload: payload})
                     
                 } else {
                     res.sendStatus(401)

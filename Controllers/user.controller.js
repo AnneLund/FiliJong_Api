@@ -15,10 +15,11 @@ attributes: [
     "id",
     "username"
 ],
-include: {
+include:[{
     model: RoleModel,
     attributes: ["id", "role"],
-},
+}
+],
         })
         res.json(result)
     };

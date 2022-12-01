@@ -13,7 +13,7 @@ RoleModel.init({
     },
     role: {
         type: DataTypes.CHAR,
-        allowNull: false,
+        allowNull: true,
     },
 },
 {

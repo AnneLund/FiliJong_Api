@@ -1,4 +1,4 @@
-const RoleModel = require('../Models/role.model')
+const RoleModel = require('../Models/role.model');
 
 class RoleController {
     constructor() {
@@ -6,7 +6,12 @@ class RoleController {
     }
 
     list = async (req, res) => {
-        const result = await RoleModel.findAll()
+        const result = await RoleModel.findAll({
+            attributes: [
+                "id",
+                "role"
+            ],
+        })
         res.json(result)
     };
     create = async (req, res) => {
