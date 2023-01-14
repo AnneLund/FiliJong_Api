@@ -1,6 +1,5 @@
 const Member1Model = require('../Models/member1.model.js')
 
-
 class Member1Controller {
     constructor() {
         console.log('Instance call of roleController')
@@ -26,7 +25,7 @@ class Member1Controller {
         if(title) {
             const wish = await Member1Model.create(req.body)
             return res.json({newId: wish.id,
-                title: wish.title                
+                message: "Ønske oprettet!"               
             })
         } else {
             res.sendStatus(418)

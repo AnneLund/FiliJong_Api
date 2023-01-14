@@ -10,6 +10,9 @@ const {Member1Router} = require('./Routes/member1.router.js')
 const {Member2Router} = require('./Routes/member2.router.js')
 const {Member3Router} = require('./Routes/member3.router.js')
 const {Member4Router} = require('./Routes/member4.router.js')
+const { AllMembersRouter } = require('./Routes/allmembers.router.js')
+const {TestRouter} = require('./Routes/test.router.js')
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -51,6 +54,8 @@ app.use(Member1Router)
 app.use(Member2Router)
 app.use(Member3Router)
 app.use(Member4Router)
+app.use(AllMembersRouter)
+app.use(TestRouter)
 
 app.listen(PORT, () => {
     console.log(`Kører på port ${PORT}`)

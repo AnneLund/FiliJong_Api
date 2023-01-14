@@ -6,8 +6,6 @@ const controller = new Member1Controller()
 
 const Member1Router = express.Router()
 
-
-
 Member1Router.get('/member1', getWishes);
 
 Member1Router.get('/member1/:id', getWishById);

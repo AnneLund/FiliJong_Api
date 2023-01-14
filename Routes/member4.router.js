@@ -1,5 +1,5 @@
 const express = require('express')
-const {Member4Controller, updateWish, getWishById, deleteWish, getWishes} = require('../Controllers/Member4.controller.js')
+const {Member4Controller, updateWish, getWishById, deleteWish, getWishes} = require('../Controllers/member4.controller.js')
 const {verifyToken} = require('../Middleware/verifyToken.js')
 
 const controller = new Member4Controller()

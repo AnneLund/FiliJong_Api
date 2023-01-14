@@ -30,7 +30,7 @@ class Member4Controller {
         if(title) {
             const wish = await Member4Model.create(req.body)
             return res.json({newId: wish.id,
-                title: wish.title                
+                message: "Ønske oprettet!"                 
             })
         } else {
             res.sendStatus(418)

@@ -1,18 +1,13 @@
-const Member2Model = require('../Models/member2.model.js')
-const RoleModel = require('../Models/role.model.js')
-const UserModel = require('../Models/user.model.js')
+const AllMembersModel = require('../Models/allmembers.model.js')
 
-RoleModel.belongsToMany(UserModel, {through: 'junction'})
-UserModel.belongsToMany(RoleModel, {through: 'junction'})
-
-class Member2Controller {
+class AllMembersController {
     constructor() {
         console.log('Instance call of roleController')
     }
 
     
     list = async (req, res) => {
-        const result = await Member2Model.findAll({
+        const result = await AllMembersModel.findAll({
             attributes: [
                 "id",
                 "title",
@@ -28,7 +23,7 @@ class Member2Controller {
         const {title} = req.body;
 
         if(title) {
-            const wish = await Member2Model.create(req.body)
+            const wish = await AllMembersModel.create(req.body)
             return res.json({newId: wish.id,
                 message: "Ønske oprettet!"               
             })
@@ -42,7 +37,7 @@ class Member2Controller {
 
 const getWishes = async (req, res) => {
     try {
-        const wish = await Member2Model.findAll();
+        const wish = await AllMembersModel.findAll();
         res.send(wish);
     } catch (err) {
         console.log(err);
@@ -52,7 +47,7 @@ const getWishes = async (req, res) => {
 
 const updateWish = async (req, res) => {
     try {
-        await Member2Model.update(req.body, {
+        await AllMembersModel.update(req.body, {
             where: {
                 id: req.body.id
             }
@@ -67,7 +62,7 @@ const updateWish = async (req, res) => {
 
 const getWishById = async (req, res) => {
     try {
-        const wish = await Member2Model.findAll({
+        const wish = await AllMembersModel.findAll({
             where: {
                 id: req.params.id
             }
@@ -80,7 +75,7 @@ const getWishById = async (req, res) => {
 
 const deleteWish = async (req, res) => {
     try {
-        await Member2Model.destroy({
+        await AllMembersModel.destroy({
             where: {
                 id: req.body.id
             }
@@ -91,4 +86,4 @@ const deleteWish = async (req, res) => {
     }
 }
 
-module.exports = {Member2Controller, updateWish, getWishById, deleteWish, getWishes}
+module.exports = {AllMembersController, updateWish, getWishById, deleteWish, getWishes}
