@@ -36,6 +36,13 @@ app.use(function (req, res, next) {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.json({ limit: "1mb" }));
+app.use(
+  express.static("public", {
+    setHeaders: (res, path, stat) => {
+      res.set("Content-Type", "text/javascript");
+    },
+  })
+);
 
 app.use(UserRouter);
 app.use(initRouter);
