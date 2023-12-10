@@ -13,6 +13,8 @@ const { Member4Router } = require("./Routes/member4.router.js");
 const { AllMembersRouter } = require("./Routes/allmembers.router.js");
 const { TestRouter } = require("./Routes/test.router.js");
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -33,16 +35,8 @@ app.use(function (req, res, next) {
 
   next();
 });
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+
 app.use(express.json({ limit: "1mb" }));
-app.use(
-  express.static("public", {
-    setHeaders: (res, path, stat) => {
-      res.set("Content-Type", "text/javascript");
-    },
-  })
-);
 
 app.use(UserRouter);
 app.use(initRouter);
@@ -59,4 +53,4 @@ app.listen(PORT, () => {
   console.log(`Kører på port ${PORT}`);
 });
 
-module.exports = { app };
+module.exports = app;
