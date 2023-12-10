@@ -26,6 +26,36 @@ class Member2Controller {
       res.sendStatus(418);
     }
   };
+
+  update = async (req, res) => {
+    const { id, title, description, købt, image, url } = req.body;
+
+    if (id) {
+      try {
+        const existingWish = await Member2Model.findByPk(id);
+
+        if (existingWish) {
+          // Perform the update
+          await existingWish.update({
+            title,
+            description,
+            købt,
+            image,
+            url,
+          });
+
+          res.status(200).json({ message: "Data updated successfully", id });
+        } else {
+          res.status(404).json({ message: "Wish not found" });
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+      }
+    } else {
+      res.status(400).json({ message: "Bad Request - Missing 'id' in the request body" });
+    }
+  };
 }
 
 const getWishes = async (req, res) => {
