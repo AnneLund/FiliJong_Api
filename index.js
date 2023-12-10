@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3123;
-const cors = require("cors");
 
 const { UserRouter } = require("./Routes/user.router.js");
 const { initRouter } = require("./Routes/init.sequelize.router.js");
@@ -44,7 +43,6 @@ app.use(
     },
   })
 );
-app.use(cors());
 
 app.use(UserRouter);
 app.use(initRouter);
