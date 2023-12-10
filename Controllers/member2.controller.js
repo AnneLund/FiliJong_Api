@@ -36,44 +36,27 @@ const getWishes = async (req, res) => {
     console.log(err);
   }
 };
-
 const updateWish = async (req, res) => {
   try {
-    const { id, ...updatedFields } = req.body;
+    // Extract the values you want to update from req.body
+    const { title, description, image, url } = req.body;
 
-    if (id !== undefined) {
-      await Member2Model.update(updatedFields, {
+    // Update the wish
+    await Member2Model.update(
+      { title, description, image, url },
+      {
         where: {
-          id: id,
+          id: req.params.id,
         },
-      });
-      res.json({
-        message: "Product Updated",
-      });
-    } else {
-      // Handle the case where id is undefined
-      res.status(400).json({
-        error: "Invalid request. 'id' is required.",
-      });
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      error: "Internal Server Error",
-    });
-  }
-};
+      }
+    );
 
-const getWishById = async (req, res) => {
-  try {
-    const wish = await Member2Model.findAll({
-      where: {
-        id: req.params.id,
-      },
+    res.json({
+      message: "Product Updated",
     });
-    res.send(wish[0]);
   } catch (err) {
     console.log(err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
