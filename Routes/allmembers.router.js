@@ -14,7 +14,7 @@ AllMembersRouter.post("/allmembers", (req, res) => {
   controller.create(req, res);
 });
 
-AllMembers.put("/allmembers/:id", (req, res) => {
+AllMembersRouter.put("/allmembers/:id", (req, res) => {
   controller.update(req, res);
 });
 
