@@ -18,7 +18,7 @@ Member2Router.put("/member2/:id", (req, res) => {
   controller.update(req, res);
 });
 
-// Member2Router.put("/member2/:id", updateWish);
+Member2Router.put("/member2/:id", updateWish);
 Member2Router.delete("/member2", deleteWish);
 
 module.exports = { Member2Router };
