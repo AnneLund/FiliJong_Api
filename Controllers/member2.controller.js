@@ -68,23 +68,17 @@ const getWishes = async (req, res) => {
 };
 
 const updateWish = async (req, res) => {
-  if (req.method === "PUT") {
-    try {
-      // Your PUT request logic goes here
-
-      const { id, data } = req.body; // Assuming you expect an 'id' and 'data' in the request body
-
-      // Perform the necessary update or processing
-      // Example: Update a database record
-      // const updatedData = await updateDataInDatabase(id, data);
-
-      res.status(200).json({ message: "Data updated successfully", id, data });
-    } catch (error) {
-      console.error("Error:", error);
-      res.status(500).json({ message: "Internal Server Error" });
-    }
-  } else {
-    res.status(405).json({ message: "Method Not Allowed" });
+  try {
+    await Member2Model.update(req.body, {
+      where: {
+        id: req.body.id,
+      },
+    });
+    res.json({
+      message: "Product Updated",
+    });
+  } catch (err) {
+    console.log(err);
   }
 };
 
