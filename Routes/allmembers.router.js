@@ -14,6 +14,10 @@ AllMembersRouter.post("/allmembers", (req, res) => {
   controller.create(req, res);
 });
 
+AllMembers.put("/allmembers/:id", (req, res) => {
+  controller.update(req, res);
+});
+
 AllMembersRouter.put("/allmembers", updateWish);
 AllMembersRouter.put("/allmembers/:id", updateWish);
 AllMembersRouter.delete("/allmembers", deleteWish);
