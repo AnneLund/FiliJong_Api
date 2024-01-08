@@ -6,6 +6,12 @@ class ClickModel extends Model {}
 
 ClickModel.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
+    },
     wishlists_clicks: {
       type: DataTypes.INTEGER,
       allowNull: false,

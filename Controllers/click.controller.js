@@ -8,7 +8,7 @@ class ClickController {
   list = async (req, res) => {
     try {
       const result = await ClickModel.findAll({
-        attributes: ["wishlists_clicks", "chatgpt_clicks"],
+        attributes: ["id", "wishlists_clicks", "chatgpt_clicks"],
       });
       res.json(result);
     } catch (error) {
@@ -19,6 +19,11 @@ class ClickController {
 
   incrementClick = async (req, res) => {
     const { type } = req.body;
+    const isMe = req.body.secretKey === process.env.MY_IP_ADDRESS;
+
+    if (isMe) {
+      return res.status(200).send("Klik fra mig - ikke registreret i databasen");
+    }
 
     if (type === "wishlists" || type === "chatgpt") {
       try {
