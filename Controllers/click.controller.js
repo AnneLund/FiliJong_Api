@@ -20,7 +20,7 @@ class ClickController {
   incrementClick = async (req, res) => {
     const { type } = req.body;
 
-    if (type === "wishlists_clicks" || type === "chatgpt_clicks") {
+    if (type === "wishlists" || type === "chatgpt") {
       try {
         const fieldName = `${type}_clicks`;
         const [clickRecord, created] = await ClickModel.findOrCreate({
