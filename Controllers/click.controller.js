@@ -8,7 +8,7 @@ class ClickController {
   list = async (req, res) => {
     try {
       const result = await ClickModel.findAll({
-        attributes: ["id", "wishlists_clicks", "chatgpt_clicks"],
+        attributes: ["id", "wishlists_clicks", "chatgpt_clicks", "last_clicked_at"],
       });
       res.json(result);
     } catch (error) {
@@ -22,8 +22,6 @@ class ClickController {
     const my_ip = process.env.MY_IP_ADDRESS;
     const clientIp = req.ip;
 
-    res.status(200).send(`My_ip: ${my_ip}, Client_ip: ${clientIp}`);
-
     if (my_ip === clientIp) {
       return res.status(200).send("Klik fra mig - ikke registreret i databasen", `My_ip: ${my_ip}, Client_ip: ${clientIp}`);
     }
@@ -31,7 +29,7 @@ class ClickController {
     if (type === "wishlists" || type === "chatgpt") {
       try {
         const fieldName = `${type}_clicks`;
-        const [clickRecord, created] = await ClickModel.findOrCreate({
+        const [clickRecord] = await ClickModel.findOrCreate({
           where: {}, // Ingen specifikke betingelser, da der kun er én række
           defaults: { [fieldName]: 0 },
         });

@@ -12,6 +12,7 @@ const { Member3Router } = require("./Routes/member3.router.js");
 const { Member4Router } = require("./Routes/member4.router.js");
 const { AllMembersRouter } = require("./Routes/allmembers.router.js");
 const { ClickRouter } = require("./Routes/click.router.js");
+const { EmailRouter } = require("./Routes/send_email.router.js");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -48,6 +49,7 @@ app.use(Member3Router);
 app.use(Member4Router);
 app.use(AllMembersRouter);
 app.use(ClickRouter);
+app.use(EmailRouter);
 
 app.listen(PORT, () => {
   console.log(`Kører på port ${PORT}`);
