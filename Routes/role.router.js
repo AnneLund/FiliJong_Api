@@ -6,7 +6,7 @@ const controller = new RoleController();
 
 const RoleRouter = express.Router();
 
-RoleRouter.get("/role", verifyToken, (req, res) => {
+RoleRouter.get("/role", (req, res) => {
   controller.list(req, res);
 });
 
