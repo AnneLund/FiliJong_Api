@@ -1,5 +1,4 @@
 const ClickModel = require("../Models/click.model.js");
-
 class ClickController {
   constructor() {
     console.log("Instance call of clickController");
