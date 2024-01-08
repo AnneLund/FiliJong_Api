@@ -8,7 +8,7 @@ class ClickController {
   list = async (req, res) => {
     try {
       const result = await ClickModel.findAll({
-        attributes: ["id", "wishlists_clicks", "chatgpt_clicks"],
+        attributes: ["wishlists_clicks", "chatgpt_clicks"],
       });
       res.json(result);
     } catch (error) {

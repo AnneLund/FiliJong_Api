@@ -11,7 +11,7 @@ ClickRouter.get("/click", (req, res) => {
 });
 
 ClickRouter.post("/click", (req, res) => {
-  controller.create(req, res);
+  controller.incrementClick(req, res); // Opdateret til at bruge incrementClick
 });
 
 module.exports = { ClickRouter };
