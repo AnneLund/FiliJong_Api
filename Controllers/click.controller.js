@@ -6,7 +6,7 @@ class ClickController {
 
   list = async (req, res) => {
     const result = await ClickModel.findAll({
-      attributes: ["id", "click"],
+      attributes: ["id", "wishlists", "chatgpt"],
     });
     res.json(result);
   };

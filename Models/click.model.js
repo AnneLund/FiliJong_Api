@@ -12,7 +12,11 @@ ClickModel.init(
       allowNull: false,
       primaryKey: true,
     },
-    click: {
+    wishlists: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    chatgpt: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
