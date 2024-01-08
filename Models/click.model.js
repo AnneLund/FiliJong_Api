@@ -22,6 +22,10 @@ ClickModel.init(
       allowNull: false,
       defaultValue: 0,
     },
+    last_clicked_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
   {
     sequelize,

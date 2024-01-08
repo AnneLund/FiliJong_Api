@@ -19,10 +19,13 @@ class ClickController {
 
   incrementClick = async (req, res) => {
     const { type } = req.body;
-    const isMe = req.body.secretKey === process.env.MY_IP_ADDRESS;
+    const my_ip = process.env.MY_IP_ADDRESS;
+    const clientIp = req.ip;
 
-    if (isMe) {
-      return res.status(200).send("Klik fra mig - ikke registreret i databasen");
+    res.status(200).send(`My_ip: ${my_ip}, Client_ip: ${clientIp}`);
+
+    if (my_ip === clientIp) {
+      return res.status(200).send("Klik fra mig - ikke registreret i databasen", `My_ip: ${my_ip}, Client_ip: ${clientIp}`);
     }
 
     if (type === "wishlists" || type === "chatgpt") {
@@ -34,6 +37,7 @@ class ClickController {
         });
 
         clickRecord[fieldName] += 1;
+        clickRecord.last_clicked_at = new Date();
         await clickRecord.save();
 
         return res.json({ message: "Click incremented successfully" });
