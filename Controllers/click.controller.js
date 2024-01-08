@@ -1,4 +1,4 @@
-const ClickModel = require("../Models/click.model");
+const ClickModel = require("../Models/click.model.js");
 
 class ClickController {
   constructor() {
