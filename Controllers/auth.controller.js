@@ -11,13 +11,13 @@ class AuthController {
   }
 
   login = async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     console.log("BACKEND-SVAR:", req.body);
 
-    if (username && password) {
+    if (email && password) {
       const data = await UserModel.findOne({
-        attributes: ["id", "username", "password", "role_id"],
-        where: { username: username },
+        attributes: ["id", "email", "password", "role_id"],
+        where: { email: email },
       });
       if (data === null) {
         return res.send({ status: "Fejl i brugernavn/kode" });
@@ -26,7 +26,7 @@ class AuthController {
         if (result) {
           const payload = {
             user_id: data.id,
-            username: data.username,
+            email: data.email,
             role_id: data.role_id,
           };
 
