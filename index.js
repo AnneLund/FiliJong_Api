@@ -6,22 +6,21 @@ const { UserRouter } = require("./Routes/user.router.js");
 const { initRouter } = require("./Routes/init.sequelize.router.js");
 const { AuthRouter } = require("./Routes/auth.router.js");
 const { RoleRouter } = require("./Routes/role.router.js");
-const { Member1Router } = require("./Routes/member1.router.js");
-const { Member2Router } = require("./Routes/member2.router.js");
-const { Member3Router } = require("./Routes/member3.router.js");
-const { Member4Router } = require("./Routes/member4.router.js");
-const { AllMembersRouter } = require("./Routes/allmembers.router.js");
-const { ClickRouter } = require("./Routes/click.router.js");
-const { EmailRouter } = require("./Routes/send_email.router.js");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+const cors = require("cors");
+app.use(cors());
+
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", "*");
   // Request methods you wish to allow
 
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
 
   // Request headers you wish to allow
   res.setHeader(
@@ -43,13 +42,6 @@ app.use(UserRouter);
 app.use(initRouter);
 app.use(AuthRouter);
 app.use(RoleRouter);
-app.use(Member1Router);
-app.use(Member2Router);
-app.use(Member3Router);
-app.use(Member4Router);
-app.use(AllMembersRouter);
-app.use(ClickRouter);
-app.use(EmailRouter);
 
 app.listen(PORT, () => {
   console.log(`Kører på port ${PORT}`);

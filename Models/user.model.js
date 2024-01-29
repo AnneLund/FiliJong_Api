@@ -1,54 +1,63 @@
-const {sequelize} = require('../Config/db.sequelize.js')
-const {DataTypes} = require('sequelize')
-const {Model} = require('sequelize')
-const bcrypt = require('bcrypt')
+const { sequelize } = require("../Config/db.sequelize.js");
+const { DataTypes } = require("sequelize");
+const { Model } = require("sequelize");
+const bcrypt = require("bcrypt");
 
 class UserModel extends Model {}
 
 UserModel.init(
-    {
-        id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-    
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
     },
-    username: {
-        type: DataTypes.CHAR,
-        allowNull: false
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+        notEmpty: true,
+      },
     },
+
     password: {
-        type: DataTypes.CHAR,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
 
-role_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-},
+    role_id: {
+      type: DataTypes.INTEGER,
+      defaultValue: 6,
+      allowNull: false,
     },
-    {
-        sequelize,
-        modelName: 'user',
-        freezeTableName: true,
-        underscored: true,
-        createdAt: true,
-        hooks: {
-            beforeCreate: async(user, options) => {
-                user.password = await createHash(user.password)
-            },
-            beforeUpdate: async (user, options) => {
-
-            }
+  },
+  {
+    sequelize,
+    modelName: "user",
+    freezeTableName: true,
+    underscored: true,
+    createdAt: true,
+    hooks: {
+      beforeCreate: async (user, options) => {
+        try {
+          user.password = await createHash(user.password);
+        } catch (error) {
+          console.error("Fejl under oprettelse af password-hash:", error);
+          // Her kan du vælge at kaste en fejl eller håndtere den på en anden måde
+          throw new Error("Fejl under oprettelse af password-hash");
         }
-    }
-)
+      },
+    },
+  }
+);
 
 const createHash = async (string) => {
-    const salt = await bcrypt.genSalt(10);
-    const hashedString = await bcrypt.hash(string, salt)
-    return hashedString
-}
+  const salt = await bcrypt.genSalt(10);
+  const hashedString = await bcrypt.hash(string, salt);
+  return hashedString;
+};
 
 module.exports = UserModel;
