@@ -12,7 +12,7 @@ class AuthController {
 
   login = async (req, res) => {
     const { username, password } = req.body;
-    console.log(req.body);
+    console.log("BACKEND-SVAR:", req.body);
 
     if (username && password) {
       const data = await UserModel.findOne({
